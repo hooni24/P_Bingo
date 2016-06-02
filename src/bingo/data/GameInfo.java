@@ -25,7 +25,16 @@ public class GameInfo implements Serializable {
 	 * */
 	public boolean markBingoResult(String keyword){
 		boolean result = false;
-		
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 5; j++){
+				if (bingoKeywords[i][j].equals(keyword)) {
+					bingoResult[i][j] = 1;
+					result = true;
+					x = i;
+					y = j;
+				}
+			}
+		}
 		return result;
 	}
 	
@@ -34,10 +43,35 @@ public class GameInfo implements Serializable {
 	 * */
 	public int checkBingo(){
 		int bingoNum = 0;
+		int chk = 0;							//줄별로 bingoResult 합 구할 변수
 		
-				
+		for(int i = 0; i < 5; i++){				//가로 세는거
+			for(int j = 0; j < 5; j++){
+				chk += bingoResult[i][j];
+			}
+			if(chk == 5) bingoNum++;
+			chk =0;
+		}
+		
+		for(int i = 0; i < 5; i++){				//세로 세는거
+			for(int j = 0; j < 5; j++){
+				chk += bingoResult[j][i];
+			}
+			if(chk == 5) bingoNum++;
+			chk =0;
+		}
+		
+		int chk2 =0;
+		for(int i = 0; i < 5; i++){				//대각 세는거
+			for(int j = 0; j < 5; j++){
+				if(i == j) chk += bingoResult[i][j];		//좌상에서 우하
+				if(i+j == 4) chk2 += bingoResult[i][j];		//우상에서 좌하
+			}
+		}
+		if(chk == 5) bingoNum++;		//좌상에서 우하
+		if(chk2 == 5) bingoNum++;		//우상에서 좌하
+
 		return bingoNum;
-		
 	}
 	
 	public int getX() {
