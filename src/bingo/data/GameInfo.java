@@ -27,7 +27,7 @@ public class GameInfo implements Serializable {
 		boolean result = false;
 		for (int i = 0; i < 5; i++){
 			for (int j = 0; j < 5; j++){
-				if (bingoKeywords[i][j].equals(keyword)) {
+				if (bingoKeywords[i][j].equalsIgnoreCase(keyword)) {
 					bingoResult[i][j] = 1;
 					result = true;
 					x = i;
@@ -97,6 +97,23 @@ public class GameInfo implements Serializable {
 	public int[][] getBingoResult() {
 		return bingoResult;
 	}
+	
+	
+	
+//	public static void main(String[] args) {		//실험용 메인메소드
+//	GameInfo game = new GameInfo();
+//	String[][] test1 = {{"1","2","3","4","5"},{"6","7","8","9","10"},{"11","12","13","14","15"},{"16","17","18","19","20"},{"21","22","23","24","25"}};
+//	game.bingoKeywords = test1;
+//	System.out.println(game.markBingoResult("25"));
+//	
+//	int[][] test2 = {{1,1,1,1,1},
+//					 {1,0,1,1,0},
+//					 {1,0,1,1,0},
+//					 {1,1,1,1,1},
+//					 {1,0,1,1,0}};
+//	game.bingoResult = test2;
+//	System.out.println("빙고갯수 : " + game.checkBingo());
+//}
 
 	
 }
